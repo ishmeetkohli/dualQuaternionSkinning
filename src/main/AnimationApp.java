@@ -13,7 +13,6 @@ public class AnimationApp {
 
 		while (!Display.isCloseRequested()) {
 			scene.getCamera().move();
-			scene.getCamera().zoom();
 			scene.getAnimatedModel().update();
 			engine.renderScene(scene);
 			engine.update();

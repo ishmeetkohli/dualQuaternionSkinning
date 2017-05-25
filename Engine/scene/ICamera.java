@@ -8,6 +8,4 @@ public interface ICamera {
 	public Matrix4f getProjectionMatrix();
 	public Matrix4f getProjectionViewMatrix();
 	public void move();
-	public void zoom();
-
 }

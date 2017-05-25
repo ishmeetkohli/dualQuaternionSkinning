@@ -108,10 +108,6 @@ public class AnimatedModelRenderer {
 		Quaternion rotationQuat = new Quaternion();
 		Quaternion.setFromMatrix(matrix, rotationQuat);
 		
-//		Quaternion blenderFix = createFromAxisAngle(1, 0, 0, -Math.PI/2);
-//		Quaternion.mul(rotationQuat, blenderFix, rotationQuat);
-//		rotationQuat.normalise(rotationQuat);
-		
 		Quaternion translationQuat = new Quaternion();
 		translationQuat.x = matrix.m03;
 		translationQuat.y = matrix.m13;

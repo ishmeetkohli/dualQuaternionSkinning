@@ -12,7 +12,7 @@ in vec3 in_weights;
 out vec2 pass_textureCoords;
 out vec3 pass_normal;
 
-uniform mat4 jointTransforms[MAX_JOINTS];
+uniform mat4x2 jointTransforms[MAX_JOINTS];
 uniform mat4 projectionViewMatrix;
 
 mat4 DQToMatrix(in vec4 Qn, in vec4 Qd)

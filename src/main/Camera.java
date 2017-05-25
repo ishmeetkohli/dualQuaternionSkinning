@@ -1,6 +1,5 @@
 package main;
 
-import org.lwjgl.input.Keyboard;
 import org.lwjgl.input.Mouse;
 import org.lwjgl.opengl.Display;
 import org.lwjgl.util.vector.Matrix4f;
@@ -22,10 +21,9 @@ public class Camera implements ICamera {
 
 	private static final float PITCH_SENSITIVITY = 0.3f;
 	private static final float YAW_SENSITIVITY = 0.3f;
-	private static final float ZOOM_SENSITIVITY = 0.3f;
 	private static final float MAX_PITCH = 90;
 
-	private static final float FOV = 270;
+	private static final float FOV = 70;
 	private static final float NEAR_PLANE = 0.2f;
 	private static final float FAR_PLANE = 400;
 
@@ -37,9 +35,6 @@ public class Camera implements ICamera {
 	private Vector3f position = new Vector3f(0, 0, 0);
 
 	private float yaw = 0;
-	private float zoom = 0;
-	private float move_x = 0;
-	private float move_y = 0;
 	private SmoothFloat pitch = new SmoothFloat(10, 10);
 	private SmoothFloat angleAroundPlayer = new SmoothFloat(0, 10);
 	private SmoothFloat distanceFromPlayer = new SmoothFloat(10, 5);
@@ -61,36 +56,6 @@ public class Camera implements ICamera {
 	}
 
 	@Override
-	public void zoom() {
-		calculateZoom();
-
-	}
-
-	private void calculateZoom() {
-		float zoomChange = Mouse.getDWheel() * ZOOM_SENSITIVITY;
-		zoom += zoomChange;
-
-		if (Keyboard.isKeyDown(Keyboard.KEY_UP)) {
-			move_y += ZOOM_SENSITIVITY;
-		}
-
-		if (Keyboard.isKeyDown(Keyboard.KEY_DOWN)) {
-			move_y -= ZOOM_SENSITIVITY;
-		}
-
-		if (Keyboard.isKeyDown(Keyboard.KEY_RIGHT)) {
-			move_x += ZOOM_SENSITIVITY;
-		}
-
-		if (Keyboard.isKeyDown(Keyboard.KEY_LEFT)) {
-			move_x -= ZOOM_SENSITIVITY;
-		}
-
-		updateViewMatrix();
-
-	}
-
-	@Override
 	public Matrix4f getViewMatrix() {
 		return viewMatrix;
 	}
@@ -109,7 +74,7 @@ public class Camera implements ICamera {
 		viewMatrix.setIdentity();
 		Matrix4f.rotate((float) Math.toRadians(pitch.get()), new Vector3f(1, 0, 0), viewMatrix, viewMatrix);
 		Matrix4f.rotate((float) Math.toRadians(yaw), new Vector3f(0, 1, 0), viewMatrix, viewMatrix);
-		Vector3f negativeCameraPos = new Vector3f(-position.x + move_x, -position.y + move_y, -position.z + zoom);
+		Vector3f negativeCameraPos = new Vector3f(-position.x, -position.y, -position.z);
 		Matrix4f.translate(negativeCameraPos, viewMatrix, viewMatrix);
 	}
 
@@ -158,7 +123,7 @@ public class Camera implements ICamera {
 		if (Mouse.isButtonDown(0)) {
 			float pitchChange = Mouse.getDY() * PITCH_SENSITIVITY;
 			pitch.increaseTarget(-pitchChange);
-//			clampPitch();
+			clampPitch();
 		}
 		pitch.update(DisplayManager.getFrameTime());
 	}
