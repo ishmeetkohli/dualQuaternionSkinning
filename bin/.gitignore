@@ -1,0 +1,16 @@
+/.DS_Store
+/animatedModel/
+/animation/
+/colladaLoader/
+/loaders/
+/main/
+/openglObjects/
+/renderEngine/
+/renderer/
+/res/
+/scene/
+/shaders/
+/skybox/
+/textures/
+/utils/
+/xmlLoader/
