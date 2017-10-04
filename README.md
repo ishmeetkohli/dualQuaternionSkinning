@@ -52,7 +52,7 @@ Dual Quaternion mathematics is similar to normal Quaternions but it is
 different from them because dual quaternions contains two quaternion one
 which is simple and the other considered as dual part.
 
-![A Dual Quaternion](images/formula.png){width="40.00000%"}
+![A Dual Quaternion](images/formula.png)
 
 They can represent both translation and rotation at the same time and
 hence a complete Rigid body transformation can be represented by a Dual
@@ -95,30 +95,12 @@ first 2 rows. Then we can compute the deformed position of a vertex with
 DQS by this formula:
 
 ![Formula for calculating vertex
-position](images/formula2.png){width="40.00000%"}
+position](images/formula2.png)
 
 I calculated these values for vertices and normals in the vertex shader.
 
-Tasks Done
-==========
-
-Learn about Rigging
--------------------
-
-I started learning about rigging first and tried out various tools for
-it, I started with Maya , moved on to Unity and finally tried Blender
-and found that blender was the most user friendly and easy to use. Hence
-I used Blender to implement rigging.
-
-Selecting the tool for implementation
--------------------------------------
-
-I tried to implement DQS on blender, maya and unity and I was able to
-use DQS but most of the work was done by the software itself and it was
-difficult to tweak the internal working and there was a learning curve
-involved. Hence I decided to stick to the basics and used openGL for my
-implementation where most the skinning computations were performed on
-the GPU using shaders. I used Java OpenGL for the project.
+Order of Tasks Done
+===================
 
 Rigging a basic cylinder
 ------------------------
@@ -128,7 +110,7 @@ a basic cylinder and then extending upon it. I created a basic 3D
 cylinder in blender and started attaching armatures and bones to it, to
 rig it as shown in figure 5.
 
-![A Rigged Cylinder](images/riggedCylinder.png){width="50.00000%"}
+![A Rigged Cylinder](images/riggedCylinder.png)
 
 Applying Linear Blend Skinning on a basic cylinder
 --------------------------------------------------
@@ -139,7 +121,7 @@ working on implementing Linear Blend Skinning. Implementing LBS on the
 GPU (shaders) was not that hard and I was easily able to to that as
 shown in figure 6.
 
-![A Skinned Cylinder](images/skinnedCylinder.png){width="50.00000%"}
+![A Skinned Cylinder](images/skinnedCylinder.png)
 
 Applying Dual Quaternion on a basic cylinder
 --------------------------------------------
@@ -159,7 +141,7 @@ produce a keyframe animation and finally exported it to a collada(.dae)
 format to be used up by my program. The model that I rigged in blender
 is shown with all the bones and their heirarchy in figure 7.
 
-![A Rigged Human Model](images/riggedHuman.png){width="50.00000%"}
+![A Rigged Human Model](images/riggedHuman.png)
 
 Project Structure
 =================
@@ -169,18 +151,8 @@ parser was used to parse models and its animations from a collada(.dae
 file) to be used up in the project.The names and brief introduction of
 most of the moving parts in the project is shown in figure.
 
-![Project Structure](images/projectStructure.png){width="50.00000%"}
+![Project Structure](images/projectStructure.png)
 
-Timeline
-========
-
-  **Phase**                       **Deadline**     **Status**
-  ------------------------------- ---------------- ------------
-  Implement LBS on a primitive    March 8, 2017    Done
-  Extend LBS on a basic model     March 15, 2017   Done
-  Rig a complex model             March 30, 2017   Done
-  Extend DQS on a complex model   April 5, 2017    Done
-  Try to improve the efficiency   April 10, 2017   Done
 
 Conclusions
 ===========
@@ -199,6 +171,3 @@ that I am exporting my .DAE file from blender and blender switches the
 axis Y and axis Z as compared to some of the other industry standards. I
 was not able to find a way to stop blender from doing this while the
 export.
-
-[^1]: e-mail:ishmeet@uvic.ca
-
