@@ -1,5 +1,7 @@
 package renderer;
 
+import java.nio.FloatBuffer;
+
 import org.lwjgl.opengl.GL11;
 import org.lwjgl.util.vector.Matrix4f;
 import org.lwjgl.util.vector.Quaternion;
@@ -41,10 +43,14 @@ public class AnimatedModelRenderer {
 		entity.getModel().bind(0, 1, 2, 3, 4);
 //		shader.jointTransforms.loadMatrixArray(entity.getJointTransforms());
 		shader.jointTransforms.loadMatrixArray(getDualQuatList(entity.getJointTransforms()));
-		
+
 		GL11.glDrawElements(GL11.GL_TRIANGLES, entity.getModel().getIndexCount(), GL11.GL_UNSIGNED_INT, 0);
 		entity.getModel().unbind(0, 1, 2, 3, 4);
 		finish();
+		
+		FloatBuffer[] yo = shader.jointTransforms.getMatrices(shader.getProgramID());
+		float[] dst = new float[16];
+		yo[1].get(dst);
 	}
 
 	/**
@@ -91,31 +97,24 @@ public class AnimatedModelRenderer {
 	}
 	
 	
-	private Quaternion createFromAxisAngle(int xx, int yy, int zz, double a)
-	{
-		float factor = (float)Math.sin(a /2.0);
-	    float x = xx * factor;
-	    float y = yy * factor;
-	    float z = zz * factor;
-	    float w = (float) Math.cos( a / 2.0 );
-
-	    Quaternion finalQuat = new Quaternion(x, y, z, w);
-	    finalQuat.normalise(finalQuat);
-	    return finalQuat;
-	}
-	
 	private Matrix4f convertToDualQuats(Matrix4f matrix) {
 		Quaternion rotationQuat = new Quaternion();
+//		Matrix4f transposedMatrix = new Matrix4f();
+//		Transposing because openGL uses column major order
+//		Matrix4f.transpose(matrix, transposedMatrix);
+//		This returns unit quaternon
+//		Quaternion.setFromMatrix(transposedMatrix, rotationQuat);
 		Quaternion.setFromMatrix(matrix, rotationQuat);
 		
 		Quaternion translationQuat = new Quaternion();
-		translationQuat.x = matrix.m03;
-		translationQuat.y = matrix.m13;
-		translationQuat.z = matrix.m23;
+		translationQuat.x = matrix.m03/2;
+		translationQuat.y = matrix.m13/2;
+		translationQuat.z = matrix.m23/2;
 		translationQuat.w = 0;
 		
 		Quaternion realPart = rotationQuat;
 		Quaternion dualPart = new Quaternion();
+//		Here order of multiplication is important t*r
 		Quaternion.mul(translationQuat, rotationQuat, dualPart);
 		
 		Matrix4f dualQuaternion = new Matrix4f();
@@ -127,7 +126,7 @@ public class AnimatedModelRenderer {
 		dualQuaternion.m10 = dualPart.x;
 		dualQuaternion.m11 = dualPart.y;
 		dualQuaternion.m12 = dualPart.z;
-		dualQuaternion.m13 = dualPart.w;
+		dualQuaternion.m13  = dualPart.w;
 		
 		return dualQuaternion;
 	}

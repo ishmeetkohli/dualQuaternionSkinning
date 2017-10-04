@@ -74,5 +74,8 @@ public class ShaderProgram {
 		return shaderID;
 	}
 
+	public int getProgramID() {
+		return programID;
+	}
 
 }
