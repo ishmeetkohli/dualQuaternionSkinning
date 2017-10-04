@@ -1,33 +1,22 @@
-# dualQuaternionSkinning
+# Dual Quaternion Skinning
 Skeletal Animation with Dual Quaternion Skinning and Linear Blend Skinning
+# Abstract
+Skinning refers to an animation technique where a model is animated
+using a skeleton (primarily when a vertex may be influenced by more than
+one bone). The Process of creating a hierarchical set of interconnected
+bones called skeleton or a rig is called Rigging.
 
----
-abstract: |
-    Skinning refers to an animation technique where a model is animated
-    using a skeleton (primarily when a vertex may be influenced by more than
-    one bone). The Process of creating a hierarchical set of interconnected
-    bones called skeleton or a rig is called Rigging.
+For real-time animation of deformable models, skinning is an important
+aspect to give the look and feel of a real character to the model. The
+standard method that is used for skinning is the Linear Blend Skinning,
+although it is very simple and effective in most cases, there are cases
+where it produces errors like loss of volume, candy wrapper artifacts
+and unrealistic looking edges. To solve these problems, we can use an
+enhanced version of skinning method called Dual Quaternion skinning
+which is not too complex as related to Linear Blend skinning but
+produces much better results.
 
-    For real-time animation of deformable models, skinning is an important
-    aspect to give the look and feel of a real character to the model. The
-    standard method that is used for skinning is the Linear Blend Skinning,
-    although it is very simple and effective in most cases, there are cases
-    where it produces errors like loss of volume, candy wrapper artifacts
-    and unrealistic looking edges. To solve these problems, we can use an
-    enhanced version of skinning method called Dual Quaternion skinning
-    which is not too complex as related to Linear Blend skinning but
-    produces much better results.
-
-    ![Candy Wrapper Artifact](images/candyWrapper.png){width="50.00000%"}
-author:
-- |
-    Ishmeet Singh Kohli[^1]\
-    Graduate Student, Department of Computer Science
-bibliography:
-- 'references.bib'
-nocite: '[@*]'
-title: Skinning with Dual Quaternions
-...
+![Candy Wrapper Artifact](images/candyWrapper.png)
 
 Introduction
 ============
